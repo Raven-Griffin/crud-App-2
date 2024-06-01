@@ -1,41 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://localhost:8080/goals/list">
 <head>
-    <meta charset="UTF-8">
-    <title>View Goals </title>
+  <meta charset="UTF-8">
+  <title>Goal List</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<h1>View Goal</h1>
-<div>
-  <p><strong>ID:</strong> <span th:text="${goal.goalId}">ID</span></p>
-  <p><strong>Title:</strong> <span th:text="${goal.title}">Title</span></p>
-  <p><strong>Details:</strong> <span th:text="${goal.details}">Details</span></p>
-  <p><strong>Target Date:</strong> <span th:text="${goal.targetDate}">Target Date</span></p>
-  <p><strong>Status:</strong> <span th:text="${goal.status}">Status</span></p>
-</div>
-<a th:href="@{/goals}">Back to Goals</a>
-<a th:href="@{/tasks/{goalId}/new(goalId=${goal.goalId})}">Add Task</a>
-<h2>Tasks</h2>
-<table>
+<h2>Goal List</h2>
+<table class="styled-table">
+  <thead>
   <tr>
-    <th>ID</th>
+    <th>Goal ID</th>
     <th>Title</th>
     <th>Details</th>
+    <th>Target Date</th>
     <th>Status</th>
     <th>Actions</th>
   </tr>
-  <tr th:each="task : ${goal.tasks}">
-    <td th:text="${task.taskId}">ID</td>
-    <td th:text="${task.title}">Title</td>
-    <td th:text="${task.details}">Details</td>
-    <td th:text="${task.status}">Status</td>
+  </thead>
+  <tbody>
+  <tr th:each="goal : ${goals}">
+    <td th:text="${goal.goalId}"></td>
+    <td th:text="${goal.title}"></td>
+    <td th:text="${goal.details}"></td>
+    <td th:text="${#dates.format(goal.targetDate, 'yyyy-MM-dd')}"></td>
+    <td th:text="${goal.status}"></td>
     <td>
-      <a th:href="@{/tasks/{id}/edit(id=${task.taskId})}">Edit</a>
-      <form th:action="@{/tasks/{id}/delete(id=${task.taskId})}" method="post">
-        <button type="submit">Delete</button>
-      </form>
+      <a th:href="@{/goals/edit/{goalId}(goalId=${goal.goalId})}">Edit</a> |
+      <a th:href="@{/goals/delete/{goalId}(goalId=${goal.goalId})}">Delete</a> |
+      <a th:href="@{/goals/{goalId}(goalId=${goal.goalId})}">View Tasks</a>
     </td>
   </tr>
+  </tbody>
 </table>
+<a class="button" th:href="@{/goals/new}">Create New Goal</a>
 </body>
 </html>

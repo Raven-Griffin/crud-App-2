@@ -2,17 +2,21 @@
 <html lang="en" xmlns:th="http://localhost:8080/goals">
 <head>
   <meta charset="UTF-8">
-  <title>Task Form</title>
+  <title>Goal Form</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<h2>Task Form</h2>
-<form th:action="@{/tasks/new/{goalId}(goalId=${task.goalId})}" method="post">
-  <input type="hidden" th:field="*{taskId}">
+<h2>Goal Form</h2>
+<form th:action="@{/goals/new}" method="post">
+  <input type="hidden" th:field="*{goalId}">
   <label>Title:</label>
   <input type="text" th:field="*{title}">
   <br>
   <label>Details:</label>
   <textarea th:field="*{details}"></textarea>
+  <br>
+  <label>Target Date:</label>
+  <input type="date" th:field="*{targetDate}">
   <br>
   <label>Status:</label>
   <select th:field="*{status}">
@@ -22,7 +26,7 @@
     <option value="cancelled">Cancelled</option>
   </select>
   <br>
-  <button type="submit">Save Task</button>
+  <button type="submit">Save Goal</button>
 </form>
 </body>
 </html>
