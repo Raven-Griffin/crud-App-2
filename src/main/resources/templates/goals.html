@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Goals</title>
+</head>
+<body>
+
+<h1>Goals</h1>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Details</th>
+    <th>Target Date</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
+  <tr th:each="goal : ${goals}">
+    <td th:text="${goal.goalId}">ID</td>
+    <td th:text="${goal.title}">Title</td>
+    <td th:text="${goal.details}">Details</td>
+    <td th:text="${goal.targetDate}">Target Date</td>
+    <td th:text="${goal.status}">Status</td>
+    <td>
+      <a th:href="@{/goals/{id}(id=${goal.goalId})}">View</a>
+      <a th:href="@{/goals/{id}/edit(id=${goal.goalId})}">Edit</a>
+      <form th:action="@{/goals/{id}/delete(id=${goal.goalId})}" method="post">
+        <button type="submit">Delete</button>
+      </form>
+    </td>
+  </tr>
+</table>
+<a th:href="@{/goals/new}">Create New Goal</a>
+</body>
+</html>

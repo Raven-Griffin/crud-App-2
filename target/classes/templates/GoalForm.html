@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://localhost:8080/tasks">
+<head>
+  <meta charset="UTF-8">
+  <title>Task Form</title>
+</head>
+<body>
+<h2>Task Form</h2>
+<form th:action="@{/tasks/new/{goalId}(goalId=${task.goalId})}" method="post">
+  <input type="hidden" th:field="*{taskId}">
+  <label>Title:</label>
+  <input type="text" th:field="*{title}">
+  <br>
+  <label>Details:</label>
+  <textarea th:field="*{details}"></textarea>
+  <br>
+  <label>Status:</label>
+  <select th:field="*{status}">
+    <option value="pending">Pending</option>
+    <option value="in-progress">In Progress</option>
+    <option value="done">Done</option>
+    <option value="cancelled">Cancelled</option>
+  </select>
+  <br>
+  <button type="submit">Save Task</button>
+</form>
+</body>
+</html>
